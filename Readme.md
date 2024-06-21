@@ -1,81 +1,95 @@
-# Local LLM Chatbot
-
-This project sets up a Streamlit-based chatbot that interacts with a locally hosted language model.
-
-## Prerequisites
-
-Make sure you have the following installed:
+Interactive Chat with Local LLMs
+Table of Contents
+•	Overview
+•	Installation
+•	Setup Llama3
+•	Setup Gemma:2b
+•	Running the Streamlit Application
+•	Testing the API
+•	Submission Requirements
+Overview
+This repository contains the setup and usage instructions for interacting with two local language models, Llama3 and Gemma:2b, using a Streamlit application. The models are served via Flask APIs.
+Installation
+Prerequisites
 - Python 3.7+
-- `pip`
-
-## Installation
-
-1. **Clone the repository**:
-
-    ```bash
-    git clone https://github.com/parthasarathydNU/simple_chat_bot_streamlit.git
-    cd simple_chat_bot_streamlit
-    ```
-
-2. **Create a virtual environment**:
-
-    ```bash
-    python -m venv venv
-    ```
-
-3. **Activate the virtual environment**:
-
-    - On Windows:
-
-        ```bash
-        .\venv\Scripts\activate
-        ```
-
-    - On macOS and Linux:
-
-        ```bash
-        source venv/bin/activate
-        ```
-
-4. **Install the required packages**:
-
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-5. **Ensure your local language model service is running**:
-    Follow the steps mentioned here to download a local instance of Ollama: `https://github.com/ollama/ollama?tab=readme-ov-file`
-
-    Start your local instance of the LLM service (e.g., llama). Refer to the specific documentation of the service for setup instructions. Example command to start the service:
-
-    ```bash
-    ollama serve --model gemma:2b
-    ```
-
-## Running the Chatbot
-
-1. **Start the Streamlit application**:
-
-    ```bash
-    streamlit run chatbot.py
-    ```
-
-2. **Open your web browser** and navigate to the URL provided by Streamlit (usually `http://localhost:8501`).
-
-3. **Interact with the chatbot** by typing messages and receiving responses from the local LLM service.
-
-## Project Structure
-
+- `pip` (Python package installer)
+- `virtualenv` (recommended)
+Create a Virtual Environment
+1. Create a virtual environment:
+```sh
+python -m venv venv
 ```
-.
-├── chatbot.py          # Main Streamlit application
-└── requirements.txt    # Python dependencies
+2. Activate the virtual environment:
+- On Windows:
+```sh
+venv\Scripts\activate
+```
+- On macOS/Linux:
+```sh
+source venv/bin/activate
+```
+Setup Llama3
+1. Clone the Llama3 repository:
+```sh
+git clone https://github.com/Ollama/llama3.git
+cd llama3
+```
+2. Install dependencies:
+```sh
+pip install -r requirements.txt
+```
+3. Run the Llama3 model server:
+```sh
+python app.py
+```
+The server should be running at `http://localhost:11434/api/chat`.
+Setup Gemma:2b
+1. Clone the Gemma:2b repository:
+```sh
+git clone https://github.com/yourusername/gemma2b.git
+cd gemma2b
+```
+2. Install dependencies:
+```sh
+pip install -r requirements.txt
+```
+3. Create a Flask server to host Gemma:2b. Save the following script as `app.py`:
+```python
+from flask import Flask, request, jsonify
+import gemma2b  # Replace with the actual import statement for Gemma:2b
+
+app = Flask(__name__)
+
+# Load your Gemma:2b model here
+model = gemma2b.load_model('path_to_model')  # Replace with the actual function to load the model
+
+@app.route('/api/chat', methods=['POST'])
+def chat():
+    data = request.json
+    model_name = data.get('model')
+    messages = data.get('messages')
+    
+    # Assuming your model takes a list of messages and returns a response
+    response = model.generate_response(messages)  # Replace with the actual function call
+    
+    return jsonify({"message": {"content": response}})
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=12345)
+```
+4. Run the Gemma:2b model server:
+```sh
+python app.py
+```
+The server should be running at `http://localhost:12345/api/chat`.
+Testing the API
+For Llama3
+```sh
+curl -X POST "http://localhost:11434/api/chat" -H "Content-Type: application/json" -d '{"model": "llama3", "messages": [{"role": "user", "content": "Hello, Llama3!"}]}'
+```
+For Gemma:2b
+```sh
+curl -X POST "http://localhost:12345/api/chat" -H "Content-Type: application/json" -d '{"model": "gemma:2b", "messages": [{"role": "user", "content": "Hello, Gemma:2b!"}]}'
 ```
 
-## Contributing
-
-Feel free to submit issues and pull requests. For major changes, please open an issue first to discuss what you would like to change.
-
-## License
-
-This project is licensed under the MIT License.
+![image](https://github.com/vishwashah2001/Chatbot/assets/114256723/bbe98e56-dd56-44da-b24a-8cdc75a66b67)
