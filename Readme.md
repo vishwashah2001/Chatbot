@@ -92,4 +92,4 @@ For Gemma:2b
 curl -X POST "http://localhost:12345/api/chat" -H "Content-Type: application/json" -d '{"model": "gemma:2b", "messages": [{"role": "user", "content": "Hello, Gemma:2b!"}]}'
 ```
 
-![image](https://github.com/vishwashah2001/Chatbot/assets/114256723/bbe98e56-dd56-44da-b24a-8cdc75a66b67)
+
