@@ -85,11 +85,17 @@ The server should be running at `http://localhost:12345/api/chat`.
 Testing the API
 For Llama3
 ```sh
-curl -X POST "http://localhost:11434/api/chat" -H "Content-Type: application/json" -d '{"model": "llama3", "messages": [{"role": "user", "content": "Hello, Llama3!"}]}'
+curl http://localhost:11434/api/generate -d '{
+  "model": "Llama3",
+  "prompt":"Why is the sky blue?"
+}
 ```
 For Gemma:2b
 ```sh
-curl -X POST "http://localhost:12345/api/chat" -H "Content-Type: application/json" -d '{"model": "gemma:2b", "messages": [{"role": "user", "content": "Hello, Gemma:2b!"}]}'
+curl http://localhost:11434/api/generate -d '{
+  "model": "gemma:2b",
+  "prompt":"Why is the sky blue?"
+}
 ```
 
 
