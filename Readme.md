@@ -93,3 +93,15 @@ curl -X POST "http://localhost:12345/api/chat" -H "Content-Type: application/jso
 ```
 
 
+After extensive testing and usage of both models, we observed the following:
+
+	•	Gemma:2b:
+	•	Speed: Gemma:2b exhibited faster response times during interactions, making it more efficient for real-time applications.
+	•	Accuracy: The model provided more accurate and contextually relevant responses in most scenarios.
+	•	Llama3:
+	•	Speed: Llama3 had slower response times compared to Gemma:2b.
+	•	Accuracy: While accurate, the responses were not as consistently relevant as those from Gemma:2b.
+
+Based on these observations, Gemma:2b is recommended for applications where speed and accuracy are critical.
+
+
