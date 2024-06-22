@@ -103,5 +103,5 @@ After extensive testing and usage of both models, we observed the following:
 	•	Accuracy: While accurate, the responses were not as consistently relevant as those from Gemma:2b.
 
 Based on these observations, Gemma:2b is recommended for applications where speed and accuracy are critical.
-
+Youtube link: https://youtu.be/at9vMPPfFHI
 
